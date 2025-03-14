@@ -8,6 +8,13 @@ app.get('/', (req, res) => {
 });
 
 import movieRouter from "./routes/movieRouter.js";
+import imagePathMiddleware from "./middlewares/imagePath.js";
+
+// middlewares
+app.use(express.static("public"));
+app.use('/img', express.static('img'));
+app.use(express.json());
+app.use(imagePathMiddleware);
 
 app.use("/movies", movieRouter);
 
