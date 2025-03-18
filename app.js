@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
 const port = process.env.SERVER_PORT;
@@ -15,6 +16,12 @@ app.use(express.static("public"));
 app.use('/img', express.static('img'));
 app.use(express.json());
 app.use(imagePathMiddleware);
+// cors
+app.use(
+    cors({
+        origin: process.env.FRONTEND_APP,
+    })
+);
 
 app.use("/movies", movieRouter);
 
