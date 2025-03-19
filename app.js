@@ -13,7 +13,6 @@ import imagePathMiddleware from "./middlewares/imagePath.js";
 
 // middlewares
 app.use(express.static("public"));
-app.use('/img', express.static('img'));
 app.use(express.json());
 app.use(imagePathMiddleware);
 // cors

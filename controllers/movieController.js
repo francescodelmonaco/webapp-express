@@ -9,18 +9,16 @@ function index(req, res) {
                 error: 'Errore lato server INDEX function',
             });
 
-        res.json(results);
+        console.log(req.imagePath);
 
-        // console.log(req.imagePath);
+        const movies = results.map((movie) => {
+            return {
+                ...movie,
+                image: req.imagePath + movie.image,
+            };
+        });
 
-        // const movies = results.map((movie) => {
-        //     return {
-        //         ...movie,
-        //         image: req.imagePath + movie.title
-        //     };
-        // });
-
-        // res.json(movies);
+        res.json(movies);
     });
 };
 
@@ -50,14 +48,10 @@ function show(req, res) {
 
             movie.reviews = reviewsResults;
 
-            res.json(movie);
-
-            // res.json({
-            //     ...movie,
-            //     image: req.imagePath + movie.image
-            // });
-
-            // res.json(movie);
+            res.json({
+                ...movie,
+                image: req.imagePath + movie.image,
+            });
         });
     });
 };
