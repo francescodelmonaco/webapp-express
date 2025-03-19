@@ -82,4 +82,31 @@ function update(req, res) {
     })
 };
 
-export { index, show, update };
+function storeReview(req, res) {
+    // recupero id
+    const { id } = req.params;
+
+    // recupero body
+    const { text, name, vote } = req.body;
+
+    // preparo query
+    const sql = `
+        INSERT INTO reviews (text, name, vote, movie_id) VALUES (?, ?, ?, ?);
+    `
+
+    // eseguo query
+    connection.query(sql, [text, name, vote, id], (error, results) => {
+        if (err) return res.status(500).json({
+            error: "Errore lato server STORE REVIEW function"
+        });
+
+        res.status(201);
+
+        res.json({
+            message: "Review added",
+            id: results.insertId,
+        });
+    });
+}
+
+export { index, show, update, storeReview };
