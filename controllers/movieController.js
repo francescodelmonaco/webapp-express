@@ -96,7 +96,7 @@ function storeReview(req, res) {
 
     // eseguo query
     connection.query(sql, [text, name, vote, id], (error, results) => {
-        if (err) return res.status(500).json({
+        if (error) return res.status(500).json({
             error: "Errore lato server STORE REVIEW function"
         });
 
